@@ -1,0 +1,1 @@
+import('./bootstrap'); // gives webpack a little more time
