@@ -3,6 +3,12 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import { StylesProvider, createGenerateClassName } from '@material-ui/styles';
 import { createBrowserHistory } from 'history';
 
+// Redux
+import {
+    setTestReduxChange
+} from '../redux'
+import store from '../redux/store'
+
 import Progress from './components/Progress';
 import Header from './components/Header';
 
@@ -24,6 +30,10 @@ export default () => {
             history.push('/dashboard');
         }
     }, [isSignedIn]);
+
+    useEffect(() => {
+        setTimeout(() => store.dispatch(setTestReduxChange()), 3000)
+    }, [])
 
     return (
         <Router history={ history }>

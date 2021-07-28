@@ -2,15 +2,19 @@ import {
   // GET_USER_BY_USERID_REQUEST,
   // GET_USER_BY_USERID_SUCCESS,
   // GET_USER_BY_USERID_FAILURE,
+  SET_AUTHORIZATION,
+  TEST_REDUX_CHANGE
 } from "./authorizationActionTypes"
 
 // initial state
 const initialState = {
+  isAuth: false,
   userContext: {
     Id: null
   },
   userDataLoading: false,
   userDataError: '',
+  testVariable: false,
 }
 
 // Objective Reducer
@@ -39,6 +43,18 @@ const authorizationReducer = (state = initialState, action) => {
     //     userContext: {},
     //     userDataError: action.payload
     //   }
+
+    case SET_AUTHORIZATION:
+      return {
+        ...state,
+        isAuth: action.payload
+      }
+
+    case TEST_REDUX_CHANGE:
+      return {
+        ...state,
+        testVariable: true
+      }
 
     default:
       return state
