@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createMemoryHistory, createBrowserHistory } from 'history';
 import App from './App';
+import { Provider } from "react-redux"
+// Create a Global Store
+import store from "../redux/store"
 
 // Mount function to start up the app
 const mount = (el, { onNavigate, defaultHistory, initialPath }) => {
@@ -13,7 +16,14 @@ const mount = (el, { onNavigate, defaultHistory, initialPath }) => {
         history.listen(onNavigate);
     }
 
-    ReactDOM.render(<App history={ history } />, el);
+    // Global Store for global processes like Authorization etc...
+    const globalStore = { ...store }
+
+    ReactDOM.render(
+        <Provider store={ globalStore }>
+            <App history={ history } />
+        </Provider>, el
+    );
 
     return {
         onParentNavigate({ pathname: nextPathname }) {
